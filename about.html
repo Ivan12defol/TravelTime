@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Про нас | TravelTime</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      body {
+        background-color: #fff;
+        color: #222;
+        line-height: 1.6;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 30px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      header.shrink {
+        padding: 15px 40px;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #f64c72;
+      }
+
+      nav a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      nav a:hover {
+        color: #f64c72;
+      }
+
+      .hero {
+        background: url("https://via.placeholder.com/1600x800") center/cover
+          no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      .hero h2 {
+        font-size: 3rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 20px 40px;
+        border-radius: 10px;
+      }
+
+      section {
+        padding: 80px 60px;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      .grid {
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+
+      .grid img {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 12px;
+        transition: transform 0.3s ease;
+      }
+
+      .grid img:hover {
+        transform: scale(1.05);
+      }
+
+      .grid-text {
+        flex: 1;
+        min-width: 280px;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        color: #f64c72;
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px;
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <header id="main-header">
+      <h1>TravelTime</h1>
+      <nav>
+        <a href="#about">Про нас</a>
+        <a href="#history">Історія</a>
+        <a href="#directions">Напрямки</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h2>Про нас</h2>
+    </div>
+
+    <section id="about" class="grid">
+      <img src="https://via.placeholder.com/500x400" alt="Про нас" />
+      <div class="grid-text">
+        <h3 class="section-title">Туроператор TravelTime</h3>
+        <p>
+          Ми — туристичний оператор, який представляє міжнародну туристичну
+          мережу в Україні. Ми організовуємо мандрівки, конференції та
+          відпочинок преміум-класу з індивідуальним підходом до кожного клієнта.
+        </p>
+      </div>
+    </section>
+
+    <section id="history" class="grid">
+      <div class="grid-text">
+        <h3 class="section-title">Історія створення</h3>
+        <p>
+          Компанія TravelTime була заснована у 2012 році з метою надати
+          європейський сервіс для туристів з України. Ми почали свою діяльність
+          з організації поїздок на Євро 2012, а з часом розширили наші напрямки
+          по всьому світу.
+        </p>
+      </div>
+      <img src="https://via.placeholder.com/500x400" alt="Історія" />
+    </section>
+
+    <section id="directions">
+      <h3 class="section-title">Наші напрямки</h3>
+      <ul>
+        <li>Приймаюча сторона у Франції</li>
+        <li>Онлайн бронювання готелів по всьому світу</li>
+        <li>Корпоративне обслуговування</li>
+        <li>Яхт-тури по всьому світу</li>
+        <li>Продаж нерухомості у Франції</li>
+      </ul>
+    </section>
+
+    <footer>&copy; 2025 TravelTime. Усі права захищено.</footer>
+
+    <script>
+      const header = document.getElementById("main-header");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          header.classList.add("shrink");
+        } else {
+          header.classList.remove("shrink");
+        }
+      });
+
+      // Плавная прокрутка для навигации
+      document.querySelectorAll("nav a").forEach((anchor) => {
+        anchor.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetId = anchor.getAttribute("href").substring(1);
+          document
+            .getElementById(targetId)
+            .scrollIntoView({ behavior: "smooth" });
+        });
+      });
+    </script>
+  </body>
+</html>

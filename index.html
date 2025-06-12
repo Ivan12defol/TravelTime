@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="TravelTime – ваш помічник у світі подорожей. Обирайте найкращі тури для відпочинку вашої мрії!"
+    />
+    <meta
+      name="keywords"
+      content="туризм, TravelTime, подорожі, пляжний відпочинок, екскурсії, активний туризм"
+    />
+    <title>TravelTime</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Roboto", Arial, sans-serif;
+      }
+      body {
+        color: #1a326c;
+        background-color: #f5f5f5;
+      }
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+      header.shrink {
+        padding: 10px 30px;
+      }
+      header h1 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #0c8ef4;
+      }
+      nav a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: #1a326c;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: #0c8ef4;
+      }
+      .hero-section {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: url("https://images.pexels.com/photos/102131/pexels-photo-102131.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
+          center/cover no-repeat;
+      }
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(26, 50, 108, 0.3);
+      }
+      .hero-content {
+        text-align: center;
+        z-index: 1;
+        color: white;
+      }
+      .hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      }
+      .hero-content p {
+        font-size: 1.3rem;
+        font-weight: 400;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+      .cta-buttons .btn {
+        padding: 0.8rem 2rem;
+        margin: 0 0.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        display: inline-block;
+      }
+      .btn-primary {
+        background-color: #0c8ef4;
+        color: white;
+        border: none;
+      }
+      .btn-primary:hover {
+        background-color: #04529d;
+        transform: translateY(-2px);
+      }
+      .tours {
+        padding: 3rem 1rem;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .tours h2 {
+        font-size: 2.2rem;
+        color: #0c8ef4;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+      .filter-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+      .filter-btn {
+        background-color: #0c8ef4;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .filter-btn:hover {
+        background-color: #04529d;
+      }
+      .filter-btn.active {
+        background-color: #1a326c;
+      }
+      .tour-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+      .tour-card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #e6e6e6;
+      }
+      .tour-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        border-color: #0c8ef4;
+      }
+      .tour-card h3 {
+        font-size: 1.4rem;
+        color: #0c8ef4;
+        margin-bottom: 0.8rem;
+      }
+      .tour-card p {
+        font-size: 1rem;
+        color: #9da1aa;
+        margin-bottom: 0.8rem;
+      }
+      .tour-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .hide {
+        display: none;
+        opacity: 0;
+      }
+      #advantages {
+        padding: 4rem 1rem;
+        background: linear-gradient(135deg, #9da1aa, #e6e6e6);
+        max-width: 1200px;
+        margin: 0 auto 2rem;
+        border-radius: 20px;
+      }
+      .advantages-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        padding: 0 1rem;
+      }
+      .advantage-card {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #e6e6e6;
+      }
+      .advantage-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        border-color: #0c8ef4;
+      }
+      .advantage-card i {
+        font-size: 2.5rem;
+        color: #0c8ef4;
+        margin-bottom: 1rem;
+      }
+      .advantage-card h3 {
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: #1a326c;
+        margin-bottom: 0.8rem;
+      }
+      .advantage-card p {
+        font-size: 1.1rem;
+        color: #9da1aa;
+        line-height: 1.5;
+      }
+      footer {
+        text-align: center;
+        padding: 30px;
+        background-color: #e6e6e6;
+        color: #1a326c;
+      }
+      footer a {
+        color: #0c8ef4;
+        text-decoration: none;
+        margin: 0 10px;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+      @media (max-width: 480px) {
+        .hero-content h1 {
+          font-size: 2rem;
+        }
+        .hero-content p {
+          font-size: 1rem;
+        }
+        header {
+          padding: 10px 20px;
+        }
+        .tours,
+        #advantages {
+          padding: 2rem 1rem;
+        }
+        .advantage-card h3 {
+          font-size: 1.5rem;
+        }
+        .advantage-card p {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header id="main-header">
+      <h1>TravelTime</h1>
+      <nav>
+        <a href="index.html" aria-label="Головна сторінка TravelTime"
+          >Головна</a
+        >
+        <a href="tours.html" aria-label="Тури від TravelTime">Тури</a>
+        <a href="about.html" aria-label="Про компанію TravelTime">Про нас</a>
+      </nav>
+    </header>
+    <div class="hero-section">
+      <div class="overlay"></div>
+      <div class="hero-content">
+        <h1 data-aos="fade-up" data-aos-duration="1000">
+          Ласкаво просимо до TravelTime — вашого помічника у світі подорожей!
+        </h1>
+        <p data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+          Ми допомагаємо обирати найкращі тури для відпочинку вашої мрії. Від
+          пляжів до гір — подорожуйте з комфортом!
+        </p>
+        <div
+          class="cta-buttons"
+          data-aos="fade-up"
+          data-aos-delay="400"
+          data-aos-duration="1000"
+        >
+          <a href="tours.html" class="btn btn-primary">Переглянути тури</a>
+        </div>
+      </div>
+    </div>
+    <section class="tours">
+      <h2 data-aos="fade-up" data-aos-duration="800">Популярні тури</h2>
+
+      <div class="tour-list">
+        <div class="tour-card" data-aos="fade-up" data-aos-duration="800">
+          <h3>Єгипет – Пляжний відпочинок</h3>
+          <p>Відпочинок на узбережжі Червоного моря.</p>
+          <p>
+            Єгипет — країна в північно-східній Африці, відома пірамідами та
+            кораловими рифами.
+          </p>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF-219XeaLuj1MdFUe-r07oETPggbsVKdD6g&s"
+            alt="Пляж у Єгипті"
+          />
+        </div>
+        <div
+          class="tour-card"
+          data-aos="fade-up"
+          data-aos-delay="200"
+          data-aos-duration="800"
+        >
+          <h3>Італія – Екскурсійний тур</h3>
+          <p>Рим, Флоренція, Венеція.</p>
+          <p>Італія — країна на півдні Європи, оточена Середземним морем.</p>
+          <img
+            src="https://tourbaza.com/wp-content/uploads/2016/02/Velich-Rimu.jpg"
+            alt="Колізей у Римі"
+          />
+        </div>
+        <div
+          class="tour-card"
+          data-aos="fade-up"
+          data-aos-delay="400"
+          data-aos-duration="800"
+        >
+          <h3>Карпати – Активний тур</h3>
+          <p>Похід на Говерлу.</p>
+          <p>
+            Карпати — гірська система в Україні, ідеальна для активного
+            відпочинку.
+          </p>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/%D0%93%D0%BE%D0%B2%D0%B5%D1%80%D0%BB%D0%B0_2015.JPG/500px-%D0%93%D0%BE%D0%B2%D0%B5%D1%80%D0%BB%D0%B0_2015.JPG"
+            alt="Говерла в Карпатах"
+          />
+        </div>
+      </div>
+    </section>
+    <section id="advantages">
+      <div class="advantages-container">
+        <div class="advantage-card" data-aos="fade-up" data-aos-duration="800">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Надійні путівки</h3>
+          <p>Гарантована якість та безпека ваших подорожей</p>
+        </div>
+        <div
+          class="advantage-card"
+          data-aos="fade-up"
+          data-aos-delay="200"
+          data-aos-duration="800"
+        >
+          <i class="fas fa-user-check"></i>
+          <h3>Індивідуальний підхід</h3>
+          <p>Тури, підібрані спеціально для вас</p>
+        </div>
+        <div
+          class="advantage-card"
+          data-aos="fade-up"
+          data-aos-delay="400"
+          data-aos-duration="800"
+        >
+          <i class="fas fa-tag"></i>
+          <h3>Кращі ціни</h3>
+          <p>Доступні пропозиції для будь-якого бюджету</p>
+        </div>
+      </div>
+    </section>
+    <footer>
+      © 2025 TravelTime. Усі права захищено. |
+      <a href="mailto:info@traveltime.ua">info@traveltime.ua</a> |
+      <a href="https://facebook.com/traveltime">Facebook</a>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        AOS.init({
+          duration: 1000,
+          once: true,
+          mirror: false,
+          offset: 50,
+          anchorPlacement: "top-bottom",
+        });
+      });
+      document.querySelectorAll("nav a").forEach((anchor) => {
+        anchor.addEventListener("click", (e) => {
+          e.preventDefault();
+          const href = anchor.getAttribute("href");
+          if (href.includes(".html")) {
+            window.location.href = href;
+          } else {
+            const targetId = href.substring(1);
+            document
+              .getElementById(targetId)
+              ?.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+      const header = document.getElementById("main-header");
+      let ticking = false;
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            if (window.scrollY > 50) {
+              header.classList.add("shrink");
+            } else {
+              header.classList.remove("shrink");
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+      const filterBox = document.querySelectorAll(".tour-card");
+      const filterGoods = (filterClass) => {
+        filterBox.forEach((item) => {
+          item.classList.remove("hide");
+          if (filterClass !== "all" && !item.classList.contains(filterClass)) {
+            item.classList.add("hide");
+          }
+        });
+      };
+      document
+        .querySelector(".filter-container")
+        .addEventListener("click", (event) => {
+          if (event.target.tagName !== "BUTTON") return;
+          document
+            .querySelector(".filter-btn.active")
+            ?.classList.remove("active");
+          event.target.classList.add("active");
+          let filterClass = event.target.dataset["f"];
+          filterGoods(filterClass);
+        });
+    </script>
+  </body>
+</html>

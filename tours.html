@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Наш Тур – Подорожуй з нами</title>
+    <style>
+      body {
+        background-color: #f0f8ff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #0077cc;
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+      }
+      h1 {
+        font-size: 48px;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      p {
+        font-size: 20px;
+        margin-top: 10px;
+        padding-bottom: 20px;
+      }
+      .filter-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin: 30px 0;
+      }
+      .filter-btn {
+        background-color: #0077cc;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .filter-btn:hover {
+        background-color: #005fa3;
+      }
+      .filter-btn.active {
+        background-color: #004e8a;
+      }
+      .tours {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+      }
+      .tour-card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        width: 280px;
+        min-width: 250px;
+        padding: 20px;
+        text-align: center;
+      }
+      .tour-card h3 {
+        margin: 0;
+        font-size: 22px;
+        color: #0077cc;
+      }
+      .tour-card p {
+        margin: 10px 0 0;
+        font-size: 16px;
+      }
+      .about_company {
+        text-align: center;
+        font-size: smaller;
+        padding: 20px;
+      }
+      img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .hide {
+        display: none;
+      }
+      .tour-card {
+        transition: opacity 0.3s ease;
+      }
+      .hide {
+        display: none;
+        opacity: 0;
+      }
+      .tour-card:not(.hide) {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Наш Тур</h1>
+      <p>Подорожуй світом разом з нами!</p>
+    </header>
+
+    <div class="filter-container">
+      <button class="filter-btn active" data-f="all">Всі</button>
+      <button class="filter-btn" data-f="beach">Пляжні</button>
+      <button class="filter-btn" data-f="excursion">Екскурсійні</button>
+      <button class="filter-btn" data-f="active">Активні</button>
+    </div>
+    <div class="tours">
+      <div class="tour-card beach">
+        <h3>Єгипет – Пляжний відпочинок</h3>
+        <p>Відпочинок на узбережжі Червоного моря.</p>
+        <p>
+          Єгипет — країна в північно-східній Африці, відома пірамідами та
+          кораловими рифами.
+        </p>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF-219XeaLuj1MdFUe-r07oETPggbsVKdD6g&s"
+          alt="Пляж у Єгипті"
+        />
+      </div>
+      <div class="tour-card excursion">
+        <h3>Італія – Екскурсійний тур</h3>
+        <p>Рим, Флоренція, Венеція.</p>
+        <p>Італія — країна на півдні Європи, оточена Середземним морем.</p>
+        <img
+          src="https://tourbaza.com/wp-content/uploads/2016/02/Velich-Rimu.jpg"
+          alt="Колізей у Римі"
+        />
+      </div>
+      <div class="tour-card active">
+        <h3>Карпати – Активний тур</h3>
+        <p>Похід на Говерлу.</p>
+        <p>
+          Карпати — гірська система в Україні, ідеальна для активного
+          відпочинку.
+        </p>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/%D0%93%D0%BE%D0%B2%D0%B5%D1%80%D0%BB%D0%B0_2015.JPG/500px-%D0%93%D0%BE%D0%B2%D0%B5%D1%80%D0%BB%D0%B0_2015.JPG"
+          alt="Говерла в Карпатах"
+        />
+      </div>
+      <div class="tour-card beach">
+        <h3>Мальдіви – Пляжний відпочинок</h3>
+        <p>Відпочинок на райських островах.</p>
+        <p>Мальдіви — острівна держава в Індійському океані.</p>
+        <img
+          src="https://toursfera.com/wp-content/uploads/2023/08/matheen-faiz-xQwa0HbMfYM-unsplash-640x400.jpg"
+          alt="Пляж на Мальдівах"
+        />
+      </div>
+      <div class="tour-card beach">
+        <h3>Таїланд – Пляжний відпочинок</h3>
+        <p>Пляжі Пхукета та Крабі.</p>
+        <p>
+          Таїланд — країна в Південно-Східній Азії, відома екзотичними пляжами.
+        </p>
+        <img
+          src="https://sun-sea.travel/uploads/ckeditor/pictures/1776/content_11.jpg"
+          alt="Пляж у Таїланді"
+        />
+      </div>
+      <div class="tour-card beach">
+        <h3>Греція – Пляжний відпочинок</h3>
+        <p>Відпочинок на островах Санторіні та Крит.</p>
+        <p>Греція — країна в Південно-Східній Європі з багатою історією.</p>
+        <img
+          src="https://postfactum.info/img/publications/1000x676/lIHiEswEsxYPjbLyVfoI1JU5TLDCxnjd.jpg"
+          alt="Острів Санторіні"
+        />
+      </div>
+      <div class="tour-card excursion">
+        <h3>Франція – Екскурсійний тур</h3>
+        <p>Париж, Труа, Шеврез.</p>
+        <p>Франція — країна в Західній Європі з багатою культурою.</p>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg/500px-La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg"
+          alt="Ейфелева вежа в Парижі"
+        />
+      </div>
+      <div class="tour-card excursion">
+        <h3>Китай – Екскурсійний тур</h3>
+        <p>Пекін, Шанхай, Гуанчжоу.</p>
+        <p>Китай — країна з багатою історією та сучасними мегаполісами.</p>
+        <img
+          src="https://www.afisha.uz/uploads/media/2025/05/289ee2bacd055e05025e2cf070a6baf2_l.webp"
+          alt="Велика Китайська стіна"
+        />
+      </div>
+      <div class="tour-card excursion">
+        <h3>США – Екскурсійний тур</h3>
+        <p>Вашингтон, Нью-Йорк.</p>
+        <p>США — країна в Північній Америці, відома хмарочосами та історією.</p>
+        <img
+          src="https://tripmydream.cc/travelhub/travel/blocks/14/5241/block_145241.jpg?v1"
+          alt="Статуя Свободи в Нью-Йорку"
+        />
+      </div>
+      <div class="tour-card excursion">
+        <h3>Бразилія – Екскурсійний тур</h3>
+        <p>Ріо-де-Жанейро.</p>
+        <p>
+          Бразилія — найбільша країна Південної Америки з яскравою культурою.
+        </p>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Rio_de_Janeiro_Helicoptero_49_Feb_2006_zoom.jpg/500px-Rio_de_Janeiro_Helicoptero_49_Feb_2006_zoom.jpg"
+          alt="Статуя Христа в Ріо-де-Жанейро"
+        />
+      </div>
+      <div class="tour-card active">
+        <h3>Непал – Активний тур</h3>
+        <p>Похід в Гімалаях.</p>
+        <p>Непал — гірська країна в Південній Азії, відома Еверестом.</p>
+        <img
+          src="https://news.pn/photo/10799af78df0f324b16baf2a538bf64a.i240x179x307.jpeg"
+          alt="Гімалаї в Непалі"
+        />
+      </div>
+      <div class="tour-card active">
+        <h3>Ісландія – Активний тур</h3>
+        <p>Похід до водоспадів та гейзерів.</p>
+        <p>Ісландія — острівна держава в Атлантичному океані.</p>
+        <img
+          src="https://aussiedlerbote.de/wp-content/uploads/2021/10/rejkyavik.jpg"
+          alt="Пейзаж Ісландії"
+        />
+      </div>
+    </div>
+
+    <section class="about_company">
+      <h2>Про TravelTime</h2>
+      <h3>
+        Ми працюємо на ринку туризму більше 10 років і допомогли тисячам
+        клієнтів знайти ідеальні подорожі. Наша команда — професіонали своєї
+        справи.
+      </h3>
+    </section>
+
+    <script>
+      const filterBox = document.querySelectorAll(".tour-card");
+      const filterGoods = (filterClass) => {
+        filterBox.forEach((item) => {
+          item.classList.remove("hide");
+          if (filterClass !== "all" && !item.classList.contains(filterClass)) {
+            item.classList.add("hide");
+          }
+        });
+      };
+      document
+        .querySelector(".filter-container")
+        .addEventListener("click", (event) => {
+          if (event.target.tagName !== "BUTTON") return;
+          document
+            .querySelector(".filter-btn.active")
+            ?.classList.remove("active");
+          event.target.classList.add("active");
+          let filterClass = event.target.dataset["f"];
+          filterGoods(filterClass);
+        });
+    </script>
+  </body>
+</html>

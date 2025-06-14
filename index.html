@@ -3,14 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="TravelTime – ваш помічник у світі подорожей. Обирайте найкращі тури для відпочинку вашої мрії!"
-    />
-    <meta
-      name="keywords"
-      content="туризм, TravelTime, подорожі, пляжний відпочинок, екскурсії, активний туризм"
-    />
     <title>TravelTime</title>
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <link
@@ -48,6 +40,7 @@
       }
       header.shrink {
         padding: 10px 30px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
       }
       header h1 {
         font-size: 1.5rem;
@@ -272,11 +265,12 @@
     <header id="main-header">
       <h1>TravelTime</h1>
       <nav>
-        <a href="index.html" aria-label="Головна сторінка TravelTime"
+        <a href="./index.html" aria-label="Головна сторінка TravelTime"
           >Головна</a
         >
-        <a href="tours.html" aria-label="Тури від TravelTime">Тури</a>
-        <a href="about.html" aria-label="Про компанію TravelTime">Про нас</a>
+        <a href="./tours.html" aria-label="Тури від TravelTime">Тури</a>
+        <a href="./about.html" aria-label="Про компанію TravelTime">Про нас</a>
+        <a href="./contacts.html" aria-label="Контакти TravelTime">Контакти</a>
       </nav>
     </header>
     <div class="hero-section">
@@ -393,24 +387,6 @@
           offset: 50,
           anchorPlacement: "top-bottom",
         });
-      });
-
-      // Стиснення хедера при прокрутці
-      const header = document.getElementById("main-header");
-      let ticking = false;
-
-      window.addEventListener("scroll", () => {
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            if (window.scrollY > 50) {
-              header.classList.add("shrink");
-            } else {
-              header.classList.remove("shrink");
-            }
-            ticking = false;
-          });
-          ticking = true;
-        }
       });
     </script>
   </body>

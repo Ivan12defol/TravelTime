@@ -3,54 +3,87 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Наш Тур – Подорожуй з нами</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <style>
-      body {
-        background-color: #f0f8ff;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
+        font-family: "Roboto", Arial, sans-serif;
+      }
+      body {
+        color: #1a326c;
+        background-color: #f5f5f5;
+        margin-top: 100px;
       }
       header {
-        background-color: #0077cc;
-        color: white;
-        padding: 40px 20px;
-        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
       }
-      h1 {
-        font-size: 48px;
-        margin: 0;
-        text-transform: uppercase;
-        letter-spacing: 2px;
+      header.shrink {
+        padding: 10px 30px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
       }
-      p {
-        font-size: 20px;
-        margin-top: 10px;
-        padding-bottom: 20px;
+      header h1 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #0c8ef4;
+        letter-spacing: -0.025em;
+      }
+      nav a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: #1a326c;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: #0c8ef4;
       }
       .filter-container {
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
         justify-content: center;
-        margin: 30px 0;
+        margin: 40px 0;
+        padding: 0 20px;
       }
       .filter-btn {
-        background-color: #0077cc;
+        background: linear-gradient(45deg, #0077cc, #0c8ef4);
         color: white;
         border: none;
         padding: 12px 24px;
         border-radius: 25px;
-        font-size: 16px;
+        font-size: 1rem;
+        font-weight: 500;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: background 0.3s, transform 0.2s;
       }
       .filter-btn:hover {
-        background-color: #005fa3;
+        background: linear-gradient(45deg, #005fa3, #0077cc);
+        transform: translateY(-2px);
       }
       .filter-btn.active {
-        background-color: #004e8a;
+        background: linear-gradient(45deg, #004e8a, #005fa3);
+        transform: scale(1.05);
       }
       .tours {
         display: flex;
@@ -58,41 +91,67 @@
         gap: 20px;
         justify-content: center;
         padding: 20px;
+        max-width: 1300px;
+        margin: 0 auto;
       }
       .tour-card {
         background-color: white;
         border-radius: 12px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        width: 280px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 300px;
         min-width: 250px;
         padding: 20px;
         text-align: center;
+        transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .tour-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
       }
       .tour-card h3 {
-        margin: 0;
-        font-size: 22px;
+        margin: 0 0 10px;
+        font-size: 1.4rem;
+        font-weight: 500;
         color: #0077cc;
       }
       .tour-card p {
-        margin: 10px 0 0;
-        font-size: 16px;
+        margin: 10px 0;
+        font-size: 0.95rem;
+        color: #555;
+        line-height: 1.5;
       }
-      .about_company {
-        text-align: center;
-        font-size: smaller;
-        padding: 20px;
-      }
-      img {
+      .tour-card img {
         width: 100%;
-        height: 200px;
+        height: 180px;
         object-fit: cover;
         border-radius: 8px;
+        margin-bottom: 10px;
+        transition: transform 0.3s;
       }
-      .hide {
-        display: none;
+      .tour-card:hover img {
+        transform: scale(1.05);
       }
-      .tour-card {
-        transition: opacity 0.3s ease;
+      .tour-card .price {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #1a326c;
+        margin: 10px 0;
+      }
+      .tour-card .details-btn {
+        background: linear-gradient(45deg, #0c8ef4, #0077cc);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+      }
+      .tour-card .details-btn:hover {
+        background: linear-gradient(45deg, #005fa3, #0077cc);
+        transform: translateY(-2px);
       }
       .hide {
         display: none;
@@ -100,15 +159,276 @@
       }
       .tour-card:not(.hide) {
         opacity: 1;
+        animation: fadeIn 0.5s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      footer {
+        text-align: center;
+        padding: 40px 20px;
+        background: linear-gradient(180deg, #e6e6e6, #d9d9d9);
+        color: #1a326c;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+      footer a {
+        color: #0c8ef4;
+        text-decoration: none;
+        margin: 0 10px;
+        transition: color 0.3s;
+      }
+      footer a:hover {
+        color: #005fa3;
+        text-decoration: underline;
+      }
+      .social-links {
+        margin: 15px 0;
+      }
+      #modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      #modal.show {
+        display: flex;
+        opacity: 1;
+      }
+      #modal-inner {
+        background: linear-gradient(180deg, #ffffff, #f9f9f9);
+        border-radius: 16px;
+        padding: 30px;
+        max-width: 650px;
+        width: 90%;
+        max-height: 85vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+      }
+      #modal.show #modal-inner {
+        transform: scale(1);
+      }
+      #modal-inner h3 {
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: #0077cc;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      #modal-inner img {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      #modal-inner p,
+      #modal-inner ul {
+        font-size: 1rem;
+        color: #1a326c;
+        line-height: 1.7;
+        margin-bottom: 15px;
+      }
+      #modal-inner ul {
+        padding-left: 25px;
+        list-style-type: disc;
+      }
+      #modal-inner ul li {
+        margin-bottom: 8px;
+      }
+      #modal-inner h4 {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #0077cc;
+        margin: 20px 0 10px;
+      }
+      #modal-inner .price {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #1a326c;
+        text-align: center;
+        margin: 20px 0;
+      }
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        color: #1a326c;
+        cursor: pointer;
+        transition: color 0.3s, transform 0.2s;
+      }
+      .close-btn:hover {
+        color: #0c8ef4;
+        transform: rotate(90deg);
+      }
+      .book-btn {
+        background: linear-gradient(45deg, #0c8ef4, #0077cc);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: block;
+        margin: 20px auto 0;
+        transition: background 0.3s, transform 0.2s;
+      }
+      .book-btn:hover {
+        background: linear-gradient(45deg, #005fa3, #0077cc);
+        transform: translateY(-2px);
+      }
+      .notification-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 3000;
+      }
+      .notification--success {
+        background: linear-gradient(45deg, #e6f3e6, #f0fff0);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        max-width: 350px;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        margin-bottom: 10px;
+      }
+      .notification--success.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .notification-body {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        color: #1a326c;
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+      .notification-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+        color: #28a745;
+      }
+      .notification-progress {
+        height: 4px;
+        background: #28a745;
+        width: 0;
+        transition: width 3s linear;
+      }
+      .notification--success.show .notification-progress {
+        width: 100%;
+      }
+      @media (max-width: 768px) {
+        .tour-card {
+          width: 280px;
+        }
+        .filter-btn {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+        #modal-inner {
+          width: 95%;
+          padding: 20px;
+          max-height: 80vh;
+        }
+        #modal-inner h3 {
+          font-size: 1.5rem;
+        }
+        #modal-inner img {
+          max-height: 250px;
+        }
+        .notification--success {
+          max-width: 300px;
+        }
+      }
+      @media (max-width: 480px) {
+        .tour-card {
+          width: 100%;
+          max-width: 300px;
+        }
+        .filter-btn {
+          padding: 8px 16px;
+          font-size: 0.85rem;
+        }
+        header {
+          padding: 10px 20px;
+        }
+        .tours {
+          padding: 2rem 1rem;
+        }
+        #modal-inner {
+          padding: 15px;
+        }
+        #modal-inner h3 {
+          font-size: 1.3rem;
+        }
+        #modal-inner img {
+          max-height: 200px;
+        }
+        #modal-inner h4 {
+          font-size: 1.1rem;
+        }
+        .book-btn {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+        .notification-container {
+          bottom: 10px;
+          right: 10px;
+        }
+        .notification--success {
+          max-width: 90%;
+          font-size: 0.9rem;
+        }
+        .notification-body {
+          padding: 12px;
+        }
+        .notification-icon {
+          width: 20px;
+          height: 20px;
+        }
       }
     </style>
   </head>
   <body>
-    <header>
-      <h1>Наш Тур</h1>
-      <p>Подорожуй світом разом з нами!</p>
+    <header id="main-header">
+      <h1>TravelTime</h1>
+      <nav>
+        <a href="./index.html" aria-label="Головна сторінка TravelTime"
+          >Головна</a
+        >
+        <a href="./tours.html" aria-label="Тури від TravelTime">Тури</a>
+        <a href="./about.html" aria-label="Про компанію TravelTime">Про нас</a>
+        <a href="./contacts.html" aria-label="Контакти TravelTime">Контакти</a>
+      </nav>
     </header>
-
     <div class="filter-container">
       <button class="filter-btn active" data-f="all">Всі</button>
       <button class="filter-btn" data-f="beach">Пляжні</button>
@@ -116,136 +436,544 @@
       <button class="filter-btn" data-f="active">Активні</button>
     </div>
     <div class="tours">
-      <div class="tour-card beach">
+      <div class="tour-card beach" data-id="1">
+        <h3>Єгипет – Пляжний відпочинок</h3>
+        <p>Відчуйте магію Єгипту біля Сфінкса та пірамід.</p>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Egypt.Giza.Sphinx.02_%28cropped%29.jpg/500px-Egypt.Giza.Sphinx.02_%28cropped%29.jpg"
+          alt="Сфінкс у Єгипті"
+        />
+        <p class="price">120000 грн</p>
+        <button class="details-btn" data-id="1">Детальніше</button>
+      </div>
+      <div class="tour-card beach" data-id="2">
         <h3>Єгипет – Пляжний відпочинок</h3>
         <p>Відпочинок на узбережжі Червоного моря.</p>
-        <p>
-          Єгипет — країна в північно-східній Африці, відома пірамідами та
-          кораловими рифами.
-        </p>
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF-219XeaLuj1MdFUe-r07oETPggbsVKdD6g&s"
           alt="Пляж у Єгипті"
         />
+        <p class="price">110000 грн</p>
+        <button class="details-btn" data-id="2">Детальніше</button>
       </div>
-      <div class="tour-card excursion">
+      <div class="tour-card excursion" data-id="3">
         <h3>Італія – Екскурсійний тур</h3>
-        <p>Рим, Флоренція, Венеція.</p>
-        <p>Італія — країна на півдні Європи, оточена Середземним морем.</p>
+        <p>Рим, Флоренція, Венеція – подорож крізь історію.</p>
         <img
           src="https://tourbaza.com/wp-content/uploads/2016/02/Velich-Rimu.jpg"
           alt="Колізей у Римі"
         />
+        <p class="price">180000 грн</p>
+        <button class="details-btn" data-id="3">Детальніше</button>
       </div>
-      <div class="tour-card active">
+      <div class="tour-card active" data-id="4">
         <h3>Карпати – Активний тур</h3>
-        <p>Похід на Говерлу.</p>
-        <p>
-          Карпати — гірська система в Україні, ідеальна для активного
-          відпочинку.
-        </p>
+        <p>Похід на Говерлу в українських Карпатах.</p>
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/%D0%93%D0%BE%D0%B2%D0%B5%D1%80%D0%BB%D0%B0_2015.JPG/500px-%D0%93%D0%BE%D0%B2%D0%B5%D1%80%D0%BB%D0%B0_2015.JPG"
           alt="Говерла в Карпатах"
         />
+        <p class="price">60000 грн</p>
+        <button class="details-btn" data-id="4">Детальніше</button>
       </div>
-      <div class="tour-card beach">
+      <div class="tour-card beach" data-id="5">
         <h3>Мальдіви – Пляжний відпочинок</h3>
-        <p>Відпочинок на райських островах.</p>
-        <p>Мальдіви — острівна держава в Індійському океані.</p>
+        <p>Райські острови в Індійському океані.</p>
         <img
           src="https://toursfera.com/wp-content/uploads/2023/08/matheen-faiz-xQwa0HbMfYM-unsplash-640x400.jpg"
           alt="Пляж на Мальдівах"
         />
+        <p class="price">150000 грн</p>
+        <button class="details-btn" data-id="5">Детальніше</button>
       </div>
-      <div class="tour-card beach">
+      <div class="tour-card beach" data-id="6">
         <h3>Таїланд – Пляжний відпочинок</h3>
-        <p>Пляжі Пхукета та Крабі.</p>
-        <p>
-          Таїланд — країна в Південно-Східній Азії, відома екзотичними пляжами.
-        </p>
+        <p>Екзотичні пляжі Пхукета та Крабі.</p>
         <img
           src="https://sun-sea.travel/uploads/ckeditor/pictures/1776/content_11.jpg"
           alt="Пляж у Таїланді"
         />
+        <p class="price">130000 грн</p>
+        <button class="details-btn" data-id="6">Детальніше</button>
       </div>
-      <div class="tour-card beach">
+      <div class="tour-card beach" data-id="7">
         <h3>Греція – Пляжний відпочинок</h3>
-        <p>Відпочинок на островах Санторіні та Крит.</p>
-        <p>Греція — країна в Південно-Східній Європі з багатою історією.</p>
+        <p>Санторіні та Крит – краса Егейського моря.</p>
         <img
           src="https://postfactum.info/img/publications/1000x676/lIHiEswEsxYPjbLyVfoI1JU5TLDCxnjd.jpg"
           alt="Острів Санторіні"
         />
+        <p class="price">140000 грн</p>
+        <button class="details-btn" data-id="7">Детальніше</button>
       </div>
-      <div class="tour-card excursion">
+      <div class="tour-card excursion" data-id="8">
         <h3>Франція – Екскурсійний тур</h3>
-        <p>Париж, Труа, Шеврез.</p>
-        <p>Франція — країна в Західній Європі з багатою культурою.</p>
+        <p>Париж, Труа, Шеврез – романтика Європи.</p>
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg/500px-La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg"
           alt="Ейфелева вежа в Парижі"
         />
+        <p class="price">190000 грн</p>
+        <button class="details-btn" data-id="8">Детальніше</button>
       </div>
-      <div class="tour-card excursion">
+      <div class="tour-card excursion" data-id="9">
         <h3>Китай – Екскурсійний тур</h3>
-        <p>Пекін, Шанхай, Гуанчжоу.</p>
-        <p>Китай — країна з багатою історією та сучасними мегаполісами.</p>
+        <p>Пекін, Шанхай, Гуанчжоу – історія та сучасність.</p>
         <img
           src="https://www.afisha.uz/uploads/media/2025/05/289ee2bacd055e05025e2cf070a6baf2_l.webp"
           alt="Велика Китайська стіна"
         />
+        <p class="price">200000 грн</p>
+        <button class="details-btn" data-id="9">Детальніше</button>
       </div>
-      <div class="tour-card excursion">
+      <div class="tour-card excursion" data-id="10">
         <h3>США – Екскурсійний тур</h3>
-        <p>Вашингтон, Нью-Йорк.</p>
-        <p>США — країна в Північній Америці, відома хмарочосами та історією.</p>
+        <p>Вашингтон, Нью-Йорк – американська мрія.</p>
         <img
           src="https://tripmydream.cc/travelhub/travel/blocks/14/5241/block_145241.jpg?v1"
           alt="Статуя Свободи в Нью-Йорку"
         />
+        <p class="price">250000 грн</p>
+        <button class="details-btn" data-id="10">Детальніше</button>
       </div>
-      <div class="tour-card excursion">
+      <div class="tour-card excursion" data-id="11">
         <h3>Бразилія – Екскурсійний тур</h3>
-        <p>Ріо-де-Жанейро.</p>
-        <p>
-          Бразилія — найбільша країна Південної Америки з яскравою культурою.
-        </p>
+        <p>Ріо-де-Жанейро – карнавал і культура.</p>
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Rio_de_Janeiro_Helicoptero_49_Feb_2006_zoom.jpg/500px-Rio_de_Janeiro_Helicoptero_49_Feb_2006_zoom.jpg"
           alt="Статуя Христа в Ріо-де-Жанейро"
         />
+        <p class="price">220000 грн</p>
+        <button class="details-btn" data-id="11">Детальніше</button>
       </div>
-      <div class="tour-card active">
+      <div class="tour-card active" data-id="12">
         <h3>Непал – Активний тур</h3>
-        <p>Похід в Гімалаях.</p>
-        <p>Непал — гірська країна в Південній Азії, відома Еверестом.</p>
+        <p>Похід у Гімалаях до Евересту.</p>
         <img
           src="https://news.pn/photo/10799af78df0f324b16baf2a538bf64a.i240x179x307.jpeg"
           alt="Гімалаї в Непалі"
         />
+        <p class="price">100000 грн</p>
+        <button class="details-btn" data-id="12">Детальніше</button>
       </div>
-      <div class="tour-card active">
+      <div class="tour-card active" data-id="13">
         <h3>Ісландія – Активний тур</h3>
-        <p>Похід до водоспадів та гейзерів.</p>
-        <p>Ісландія — острівна держава в Атлантичному океані.</p>
+        <p>Водоспади та гейзери Атлантичного океану.</p>
         <img
           src="https://aussiedlerbote.de/wp-content/uploads/2021/10/rejkyavik.jpg"
           alt="Пейзаж Ісландії"
         />
+        <p class="price">180000 грн</p>
+        <button class="details-btn" data-id="13">Детальніше</button>
+      </div>
+      <div class="tour-card excursion" data-id="14">
+        <h3>Португалія</h3>
+        <p>Романтика океану та старовинні міста.</p>
+        <img
+          src="https://iworld.com/wp-content/uploads/2022/12/life-portugal-1920x1280.jpg"
+          alt="Португалія"
+        />
+        <p class="price">170000 грн</p>
+        <button class="details-btn" data-id="14">Детальніше</button>
+      </div>
+      <div class="tour-card excursion" data-id="15">
+        <h3>Італія</h3>
+        <p>Подорож крізь століття з багатою історією.</p>
+        <img
+          src="https://st.depositphotos.com/1611230/3048/i/450/depositphotos_30484117-stock-photo-florence-with-cathedral-and-typical.jpg"
+          alt="Італія"
+        />
+        <p class="price">175000 грн</p>
+        <button class="details-btn" data-id="15">Детальніше</button>
+      </div>
+      <div class="tour-card" data-id="16">
+        <h3>Одеса</h3>
+        <p>Місто з неповторним гумором і морським шармом.</p>
+        <img
+          src="https://kirillovka.ks.ua/wp-content/uploads/2018/11/odessa-13-aleksey-chumak.jpg"
+          alt="Одеса"
+        />
+        <p class="price">50000 грн</p>
+        <button class="details-btn" data-id="16">Детальніше</button>
+      </div>
+      <div class="tour-card" data-id="17">
+        <h3>Трускавець</h3>
+        <p>Бальнеологічний курорт у передгір’ї Карпат.</p>
+        <img
+          src="https://svityaz-resort.com.ua/media/gallery/full/spa-7-slide.jpg"
+          alt="Трускавець"
+        />
+        <p class="price">45000 грн</p>
+        <button class="details-btn" data-id="17">Детальніше</button>
       </div>
     </div>
-
-    <section class="about_company">
-      <h2>Про TravelTime</h2>
-      <h3>
+    <footer>
+      <p>
         Ми працюємо на ринку туризму більше 10 років і допомогли тисячам
         клієнтів знайти ідеальні подорожі. Наша команда — професіонали своєї
         справи.
-      </h3>
-    </section>
-
+      </p>
+      <div class="social-links">
+        <a href="mailto:info@nash-tur.ua">info@nash-tur.ua</a>
+        <a href="https://facebook.com/nash-tur">Facebook</a>
+      </div>
+      <p>© 2025 Наш Тур. Усі права захищено.</p>
+    </footer>
+    <div id="modal">
+      <div id="modal-inner"></div>
+    </div>
+    <div class="notification-container"></div>
     <script>
+      const tours = {
+        1: {
+          title: "Єгипет – Пляжний відпочинок",
+          image:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Egypt.Giza.Sphinx.02_%28cropped%29.jpg/500px-Egypt.Giza.Sphinx.02_%28cropped%29.jpg",
+          price: 120000,
+          text: `<h4>Опис туру</h4>
+                 <p>Відчуйте магію Єгипту біля Сфінкса та пірамід. Тиждень релаксу на узбережжі Хургади з екскурсіями до історичних пам'яток Гізи та Каїра. Комфортне проживання та якісний сервіс гарантовано.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 7 днів</li>
+                   <li>Дати: щомісяця, 2025</li>
+                   <li>Харчування: сніданки включено</li>
+                   <li>Транспорт: авіапереліт + трансфер</li>
+                   <li>Проживання: 5-зірковий готель</li>
+                   <li>Послуги: екскурсія до пірамід Гізи, страхування</li>
+                 </ul>`,
+        },
+        2: {
+          title: "Єгипет – Пляжний відпочинок",
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF-219XeaLuj1MdFUe-r07oETPggbsVKdD6g&s",
+          price: 110000,
+          text: `<h4>Опис туру</h4>
+                 <p>Насолоджуйтесь Червним морем у Шарм-ель-Шейху з його кораловими рифами. Ідеально для дайвінгу, снорклінгу та пляжного відпочинку. All-inclusive для максимального комфорту.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 7 днів</li>
+                   <li>Дати: щомісяця, 2025</li>
+                   <li>Харчування: All-inclusive</li>
+                   <li>Транспорт: авіапереліт + трансфер</li>
+                   <li>Проживання: 4-зірковий готель</li>
+                   <li>Послуги: дайвінг-тури, трансфер до пляжу</li>
+                 </ul>`,
+        },
+        3: {
+          title: "Італія – Екскурсійний тур",
+          image:
+            "https://tourbaza.com/wp-content/uploads/2016/02/Velich-Rimu.jpg",
+          price: 180000,
+          text: `<h4>Опис туру</h4>
+                 <p>Подорож крізь історію Італії: Рим з Колізеєм, Флоренція з мистецтвом Ренесансу та Венеція з її каналами. Професійні гіди розкажуть про кожну пам'ятку.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 10 днів</li>
+                   <li>Дати: квітень, червень, вересень 2025</li>
+                   <li>Харчування: сніданки</li>
+                   <li>Транспорт: авіапереліт + автобус</li>
+                   <li>Проживання: 4-зірковий готель</li>
+                   <li>Послуги: гід-екскурсовод, вхідні квитки, страхування</li>
+                 </ul>`,
+        },
+        4: {
+          title: "Карпати – Активний тур",
+          image:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/%D0%93%D0%BE%D0%B2%D0%B5%D1%80%D0%BB%D0%B0_2015.JPG/500px-%D0%93%D0%BE%D0%B2%D0%B5%D1%80%D0%BB%D0%B0_2015.JPG",
+          price: 60000,
+          text: `<h4>Опис туру</h4>
+                 <p>Похід на Говерлу – найвищу вершину України. Активний відпочинок у Карпатах із мальовничими краєвидами та свіжим повітрям. Підходить для новачків.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 5 днів</li>
+                   <li>Дати: травень–жовтень 2025</li>
+                   <li>Харчування: сніданки та обіди</li>
+                   <li>Транспорт: автобус</li>
+                   <li>Проживання: котеджі</li>
+                   <li>Послуги: супровід гіда, прокат спорядження</li>
+                 </ul>`,
+        },
+        5: {
+          title: "Мальдіви – Пляжний відпочинок",
+          image:
+            "https://toursfera.com/wp-content/uploads/2023/08/matheen-faiz-xQwa0HbMfYM-unsplash-640x400.jpg",
+          price: 150000,
+          text: `<h4>Опис туру</h4>
+                 <p>Райський відпочинок на Мальдівах із бірюзовими лагунами та білими пляжами. Проживання в бунгало над водою для незабутніх вражень.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 7 днів</li>
+                   <li>Дати: щомісяця, 2025</li>
+                   <li>Харчування: сніданки + вечері</li>
+                   <li>Транспорт: авіапереліт + трансфер</li>
+                   <li>Проживання: бунгало</li>
+                   <li>Послуги: снорклінг, романтична вечеря, страхування</li>
+                 </ul>`,
+        },
+        6: {
+          title: "Таїланд – Пляжний відпочинок",
+          image:
+            "https://sun-sea.travel/uploads/ckeditor/pictures/1776/content_11.jpg",
+          price: 130000,
+          text: `<h4>Опис туру</h4>
+                 <p>Екзотичний відпочинок на пляжах Пхукета та Крабі. Познайомтеся з тайською культурою, храмами та кухнею. All-inclusive для релаксу.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 10 днів</li>
+                   <li>Дати: листопад–березень 2025</li>
+                   <li>Харчування: All-inclusive</li>
+                   <li>Транспорт: авіапереліт + трансфер</li>
+                   <li>Проживання: 4-зірковий готель</li>
+                   <li>Послуги: екскурсії до храмів, масаж, страхування</li>
+                 </ul>`,
+        },
+        7: {
+          title: "Греція – Пляжний відпочинок",
+          image:
+            "https://postfactum.info/img/publications/1000x676/lIHiEswEsxYPjbLyVfoI1JU5TLDCxnjd.jpg",
+          price: 140000,
+          text: `<h4>Опис туру</h4>
+                 <p>Санторіні та Крит – ідеальне поєднання пляжного відпочинку та античної історії. Блакитні куполи та кришталеве море чекають на вас.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 7 днів</li>
+                   <li>Дати: травень–вересень 2025</li>
+                   <li>Харчування: сніданки</li>
+                   <li>Транспорт: авіапереліт + трансфер</li>
+                   <li>Проживання: 4-зірковий готель</li>
+                   <li>Послуги: екскурсії до античних пам'яток, страхування</li>
+                 </ul>`,
+        },
+        8: {
+          title: "Франція – Екскурсійний тур",
+          image:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg/500px-La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg",
+          price: 190000,
+          text: `<h4>Опис туру</h4>
+                 <p>Романтична подорож Францією: Париж із Ейфелевою вежею, історичні Труа та Шеврез. Смакуйте французькі вина та культуру.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 8 днів</li>
+                   <li>Дати: квітень, липень, жовтень 2025</li>
+                   <li>Харчування: сніданки</li>
+                   <li>Транспорт: авіапереліт + автобус</li>
+                   <li>Проживання: 4-зірковий готель</li>
+                   <li>Послуги: гід, дегустація вин, вхідні квитки</li>
+                 </ul>`,
+        },
+        9: {
+          title: "Китай – Екскурсійний тур",
+          image:
+            "https://www.afisha.uz/uploads/media/2025/05/289ee2bacd055e05025e2cf070a6baf2_l.webp",
+          price: 200000,
+          text: `<h4>Опис туру</h4>
+                 <p>Відкрийте Китай: Велика Китайська стіна в Пекіні, сучасний Шанхай і культурний Гуанчжоу. Поєднання традицій і сучасності.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 12 днів</li>
+                   <li>Дати: березень, червень, листопад 2025</li>
+                   <li>Харчування: сніданки</li>
+                   <li>Транспорт: авіапереліт + автобус</li>
+                   <li>Проживання: 4-зірковий готель</li>
+                   <li>Послуги: гід, китайська кухня, вхідні квитки</li>
+                 </ul>`,
+        },
+        10: {
+          title: "США – Екскурсійний тур",
+          image:
+            "https://tripmydream.cc/travelhub/travel/blocks/14/5241/block_145241.jpg?v1",
+          price: 250000,
+          text: `<h4>Опис туру</h4>
+                 <p>Американська мрія: хмарочоси Нью-Йорка, Статуя Свободи та історичний Вашингтон. Незабутня подорож до США.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 10 днів</li>
+                   <li>Дати: травень, серпень, грудень 2025</li>
+                   <li>Харчування: сніданки</li>
+                   <li>Транспорт: авіапереліт + автобус</li>
+                   <li>Проживання: 4-зірковий готель</li>
+                   <li>Послуги: екскурсії, гід, страхування</li>
+                 </ul>`,
+        },
+        11: {
+          title: "Бразилія – Екскурсійний тур",
+          image:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Rio_de_Janeiro_Helicoptero_49_Feb_2006_zoom.jpg/500px-Rio_de_Janeiro_Helicoptero_49_Feb_2006_zoom.jpg",
+          price: 220000,
+          text: `<h4>Опис туру</h4>
+                 <p>Ріо-де-Жанейро: статуя Христа, карнавал і пляжі Копакабана. Пориньте в бразильську культуру та ритми самби.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 9 днів</li>
+                   <li>Дати: лютий, липень, листопад 2025</li>
+                   <li>Харчування: сніданки</li>
+                   <li>Транспорт: авіапереліт + трансфер</li>
+                   <li>Проживання: 4-зірковий готель</li>
+                   <li>Послуги: екскурсії, уроки самби, страхування</li>
+                 </ul>`,
+        },
+        12: {
+          title: "Непал – Активний тур",
+          image:
+            "https://news.pn/photo/10799af78df0f324b16baf2a538bf64a.i240x179x307.jpeg",
+          price: 100000,
+          text: `<h4>Опис туру</h4>
+                 <p>Похід до базового табору Евересту в Гімалаях. Незабутня пригода для любителів активного відпочинку.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 10 днів</li>
+                   <li>Дати: квітень, жовтень 2025</li>
+                   <li>Харчування: сніданки та обіди</li>
+                   <li>Транспорт: авіапереліт + трансфер</li>
+                   <li>Проживання: лоджі</li>
+                   <li>Послуги: гід, прокат спорядження, страхування</li>
+                 </ul>`,
+        },
+        13: {
+          title: "Ісландія – Активний тур",
+          image:
+            "https://aussiedlerbote.de/wp-content/uploads/2021/10/rejkyavik.jpg",
+          price: 180000,
+          text: `<h4>Опис туру</h4>
+                 <p>Досліджуйте водоспади, гейзери та льодовики Ісландії. Активний тур із походами та екскурсіями.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 8 днів</li>
+                   <li>Дати: червень–серпень 2025</li>
+                   <li>Харчування: сніданки</li>
+                   <li>Транспорт: авіапереліт + автобус</li>
+                   <li>Проживання: 3-зірковий готель</li>
+                   <li>Послуги: гід, екскурсії до гейзерів, страхування</li>
+                 </ul>`,
+        },
+        14: {
+          title: "Португалія",
+          image:
+            "https://iworld.com/wp-content/uploads/2022/12/life-portugal-1920x1280.jpg",
+          price: 170000,
+          text: `<h4>Опис туру</h4>
+                 <p>Романтична Португалія: Лісабон, Порту та узбережжя Атлантики. Смакуйте портвейн і відкривайте старовинні міста.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 8 днів</li>
+                   <li>Дати: травень, вересень 2025</li>
+                   <li>Харчування: сніданки</li>
+                   <li>Транспорт: авіапереліт + автобус</li>
+                   <li>Проживання: 4-зірковий готель</li>
+                   <li>Послуги: гід, дегустація портвейну, екскурсії</li>
+                 </ul>`,
+        },
+        15: {
+          title: "Італія",
+          image:
+            "https://st.depositphotos.com/1611230/3048/i/450/depositphotos_30484117-stock-photo-florence-with-cathedral-and-typical.jpg",
+          price: 175000,
+          text: `<h4>Опис туру</h4>
+                 <p>Подорож Тосканою: Флоренція, Сієна та виноградники. Пориньте в італійську культуру та кухню.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 7 днів</li>
+                   <li>Дати: квітень, жовтень 2025</li>
+                   <li>Харчування: сніданки</li>
+                   <li>Транспорт: авіапереліт + автобус</li>
+                   <li>Проживання: 4-зірковий готель</li>
+                   <li>Послуги: гід, дегустація вин, екскурсії</li>
+                 </ul>`,
+        },
+        16: {
+          title: "Одеса",
+          image:
+            "https://kirillovka.ks.ua/wp-content/uploads/2018/11/odessa-13-aleksey-chumak.jpg",
+          price: 50000,
+          text: `<h4>Опис туру</h4>
+                 <p>Відчуйте шарм Одеси: море, гумор і культурні пам'ятки. Прогулянки Дерибасівською та пляжний відпочинок.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 5 днів</li>
+                   <li>Дати: травень–вересень 2025</li>
+                   <li>Харчування: сніданки</li>
+                   <li>Транспорт: поїзд</li>
+                   <li>Проживання: 3-зірковий готель</li>
+                   <li>Послуги: екскурсії, гід, страхування</li>
+                 </ul>`,
+        },
+        17: {
+          title: "Трускавець",
+          image:
+            "https://svityaz-resort.com.ua/media/gallery/full/spa-7-slide.jpg",
+          price: 45000,
+          text: `<h4>Опис туру</h4>
+                 <p>Оздоровчий відпочинок у Трускавці: мінеральні води, СПА та Карпати. Ідеально для релаксу та відновлення.</p>
+                 <h4>Характеристики</h4>
+                 <ul>
+                   <li>Тривалість: 7 днів</li>
+                   <li>Дати: щомісяця, 2025</li>
+                   <li>Харчування: повний пансіон</li>
+                   <li>Транспорт: поїзд</li>
+                   <li>Проживання: санаторій</li>
+                   <li>Послуги: лікувальні процедури, СПА, екскурсії</li>
+                 </ul>`,
+        },
+      };
+      const modal = document.getElementById("modal");
+      const modalInner = document.getElementById("modal-inner");
+      const notificationContainer = document.querySelector(
+        ".notification-container"
+      );
+      function openModal(id) {
+        const tour = tours[id];
+        modalInner.innerHTML = `
+          <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+          <h3>${tour.title}</h3>
+          <img src="${tour.image}" alt="${tour.title}">
+          ${tour.text}
+          <p class="price">${tour.price.toLocaleString()} грн</p>
+          <button class="book-btn">Забронювати</button>
+        `;
+        modal.classList.add("show");
+        const bookBtn = modalInner.querySelector(".book-btn");
+        bookBtn.addEventListener("click", () => {
+          closeModal();
+          showNotification(
+            `Ваше бронювання туру "${
+              tour.title
+            }" на суму ${tour.price.toLocaleString()} грн успішно оформлено! 🚀`
+          );
+        });
+      }
+      function closeModal() {
+        modal.classList.remove("show");
+      }
+      function showNotification(message) {
+        const notification = document.createElement("div");
+        notification.classList.add("notification--success");
+        notification.innerHTML = `
+          <div class="notification-body">
+            <i class="fas fa-check-circle notification-icon"></i>
+            ${message}
+          </div>
+          <div class="notification-progress"></div>
+        `;
+        notificationContainer.appendChild(notification);
+        setTimeout(() => {
+          notification.classList.add("show");
+        }, 10);
+        setTimeout(() => {
+          notification.classList.remove("show");
+          setTimeout(() => {
+            notification.remove();
+          }, 300);
+        }, 3000);
+      }
+      window.onclick = function (e) {
+        if (e.target === modal) closeModal();
+      };
+      document.querySelectorAll(".details-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          const id = button.getAttribute("data-id");
+          openModal(id);
+        });
+      });
       const filterBox = document.querySelectorAll(".tour-card");
       const filterGoods = (filterClass) => {
         filterBox.forEach((item) => {
@@ -266,6 +994,21 @@
           let filterClass = event.target.dataset["f"];
           filterGoods(filterClass);
         });
+      const header = document.getElementById("main-header");
+      let ticking = false;
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            if (window.scrollY > 50) {
+              header.classList.add("shrink");
+            } else {
+              header.classList.remove("shrink");
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
     </script>
   </body>
 </html>

@@ -44,24 +44,24 @@
       header h1 {
         font-size: 1.5rem;
         font-weight: bold;
-        color: #f64c72;
+        color: #0cdc2a;
       }
 
       nav a {
         margin-left: 20px;
         text-decoration: none;
-        color: #333;
-        font-weight: 500;
+        color: #04529d;
+        font-weight: bold;
         transition: color 0.3s;
       }
 
       nav a:hover {
-        color: #f64c72;
+        color: #0c8ef4;
       }
 
       .hero {
-        background: url("https://via.placeholder.com/1600x800") center/cover
-          no-repeat;
+        background: url("https://img.tsn.ua/cached/356/tsn-db9ef401efc93a5fd1b676cd38abbef3/thumbs/x/d6/ec/39811709fee78b32c2ea441734dcecd6.jpeg")
+          center/cover no-repeat;
         height: 100vh;
         display: flex;
         justify-content: center;
@@ -109,7 +109,8 @@
       .section-title {
         font-size: 2.2rem;
         margin-bottom: 20px;
-        color: #f64c72;
+        color: #04529d;
+        font-weight: bold;
       }
 
       footer {
@@ -117,15 +118,81 @@
         padding: 30px;
         background-color: #f1f1f1;
       }
+
+      .team-section {
+        margin-top: 80px;
+      }
+
+      .team-carousel {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 30px;
+        padding-bottom: 20px;
+      }
+
+      .team-member {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        width: 200px;
+        text-align: center;
+      }
+
+      .team-member img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+      }
+
+      .team-member img:hover {
+        transform: scale(1.1);
+      }
+
+      .team-member h4 {
+        margin-top: 10px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #1a326c;
+      }
+
+      .language-switcher {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #e6e6e6;
+        padding: 8px 12px;
+        border-radius: 6px;
+      }
+
+      .language-switcher button {
+        background: none;
+        border: none;
+        margin: 0 5px;
+        font-weight: bold;
+        color: #04529d;
+        cursor: pointer;
+      }
+
+      .language-switcher button:hover {
+        color: #0c8ef4;
+      }
     </style>
   </head>
   <body>
+    <div class="language-switcher">
+      <button onclick="setLanguage('uk')">🇺🇦 UA</button>
+      <button onclick="setLanguage('en')">🇬🇧 EN</button>
+    </div>
+
     <header id="main-header">
       <h1>TravelTime</h1>
       <nav>
         <a href="#about">Про нас</a>
         <a href="#history">Історія</a>
         <a href="#directions">Напрямки</a>
+        <a href="#team">Наш робітничий штаб</a>
       </nav>
     </header>
 
@@ -134,7 +201,10 @@
     </div>
 
     <section id="about" class="grid">
-      <img src="https://via.placeholder.com/500x400" alt="Про нас" />
+      <img
+        src="https://tripmydream.cc/travelhub/blog/blog/42/6/block_426.jpg"
+        alt="Про нас"
+      />
       <div class="grid-text">
         <h3 class="section-title">Туроператор TravelTime</h3>
         <p>
@@ -155,7 +225,10 @@
           по всьому світу.
         </p>
       </div>
-      <img src="https://via.placeholder.com/500x400" alt="Історія" />
+      <img
+        src="https://static.ua-football.com/img/upload/20/28fb03.jpeg"
+        alt="Історія"
+      />
     </section>
 
     <section id="directions">
@@ -169,28 +242,72 @@
       </ul>
     </section>
 
+    <section id="team" class="team-section">
+      <h3 class="section-title">Наш робітничий штаб</h3>
+      <div class="team-carousel">
+        <div class="team-member">
+          <img
+            src="https://povaha.org.ua/wp-content/uploads/2017/08/DSC_3084.jpg"
+            alt="Працівник 1"
+          />
+          <h4>Олена Іваненко</h4>
+        </div>
+        <div class="team-member">
+          <img
+            src="https://lt.ogo.ua/wp-content/uploads/2022/11/cholovik-720x480.jpg"
+            alt="Працівник 2"
+          />
+          <h4>Андрій Коваленко</h4>
+        </div>
+        <div class="team-member">
+          <img
+            src="https://klepkainfo.com/wp-content/uploads/2023/10/marina-giulia-cavalli.jpg"
+            alt="Працівник 3"
+          />
+          <h4>Марина Литвин</h4>
+        </div>
+        <div class="team-member">
+          <img
+            src="https://cdn.chesno.org/web/media/thumbs/posts/2019/05/30/dIDuHjngN87t.png"
+            alt="Працівник 4"
+          />
+          <h4>Ігор Стеценко</h4>
+        </div>
+        <div class="team-member">
+          <img
+            src="https://quistorage.blob.core.windows.net/content/blog/o-nezavisimykh-zhenshchinakh/f7e3ff25f0004720876163460a1da1fc.jpg"
+            alt="Працівник 5"
+          />
+          <h4>Світлана Гнатюк</h4>
+        </div>
+        <div class="team-member">
+          <img
+            src="https://ibilingua.com/wp-content/uploads/2018/06/cholovyk-e1488134340882.jpg"
+            alt="Працівник 6"
+          />
+          <h4>Богдан Вербицький</h4>
+        </div>
+        <div class="team-member">
+          <img
+            src="https://st2.depositphotos.com/4218696/9053/i/450/depositphotos_90532834-stock-photo-young-woman-in-national-ukrainian.jpg"
+            alt="Працівник 7"
+          />
+          <h4>Наталя Кравчук</h4>
+        </div>
+      </div>
+    </section>
+
     <footer>&copy; 2025 TravelTime. Усі права захищено.</footer>
 
     <script>
       const header = document.getElementById("main-header");
       window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          header.classList.add("shrink");
-        } else {
-          header.classList.remove("shrink");
-        }
+        header.classList.toggle("shrink", window.scrollY > 50);
       });
 
-      // Плавная прокрутка для навигации
-      document.querySelectorAll("nav a").forEach((anchor) => {
-        anchor.addEventListener("click", (e) => {
-          e.preventDefault();
-          const targetId = anchor.getAttribute("href").substring(1);
-          document
-            .getElementById(targetId)
-            .scrollIntoView({ behavior: "smooth" });
-        });
-      });
+      function setLanguage(lang) {
+        alert("Функція перемикання мови наразі демонстраційна: " + lang);
+      }
     </script>
   </body>
 </html>
